@@ -89,6 +89,23 @@
             color: white;
         }
 
+        /* Back Button Styling */ 
+.back-button { 
+    position: absolute; 
+    top: 10px; 
+    left: 1000px; /* Adjust the position from the left edge */ 
+    padding: 8px 16px; 
+    background-color: #352492; 
+    color: white; 
+    font-size: 16px; 
+    font-weight: bold; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    display: inline-flex; 
+    align-items: center; 
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
         /* Marquee Styling */
         .marquee-container {
            position: absolute; 
@@ -625,6 +642,11 @@ table tr:nth-child(odd):hover td {
         <div class="header-content">
             <img class="logo" src="images/nk.jpg" alt="Website Logo">
         </div>
+
+        <!-- Back Button in Header --> 
+    <a href="about me.html" class="back-button"> 
+      &#8592; Back 
+  </a>
 
         <div class="marquee-container">
         <marquee behavior="scroll" direction="left">IMD 318 | PERSONAL RESUME WEBSITE</marquee>

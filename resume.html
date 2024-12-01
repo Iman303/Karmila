@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Nurin Karmila Binti Abdullah</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #c6c6ec;
+            color: white;
+        }
+
+        header {
+            position: relative;
+            height: 30vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        header video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            z-index: 1;
+        }
+
+        header img {
+            margin-top: 20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #000;
+            z-index: 1;
+        }
+
+        #date-time {
+            margin-top: 10px;
+            font-size: 1.2em;
+            z-index: 1;
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #000;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #001f3f;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: left 0.3s ease;
+            padding-top: 60px;
+            z-index: 1000;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .sidebar a:hover {
+            background-color: #1E90FF;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #001f3f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1100;
+        }
+
+        .toggle-btn:hover {
+            background-color: #1E90FF;
+        }
+
+       /* Marquee Styling */
+.marquee-container {
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%;
+    background-color: #002b80;
+    padding: 6px;
+    text-align: center;
+    color: white;
+    font-size: 0.9em;
+    z-index: 1; /* Ensure it's above the video background */
+}
+marquee {
+    font-weight: bold;
+    color: #ffd700; /* Gold color for the marquee text */
+} 
+
+        /* Modern Footer Styling */
+.modern-footer {
+    background: #004d99;
+    color: white;
+    padding: 40px 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-container div {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-about h3,
+.footer-links h3,
+.footer-contact h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ffd700; /* Gold underline */
+    display: inline-block;
+    padding-bottom: 1px;
+}
+
+.footer-about p,
+.footer-contact p {
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #ffd700; /* Gold hover effect */
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a img {
+    width: 25px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons a img:hover {
+    transform: scale(1.2);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 5px;
+    font-size: 0.8em;
+}
+
+.footer-bottom a {
+    color: #ffd700;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+/* Keyframes for sliding animation */
+@keyframes slideInOut {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+    
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #c6c6ec; /* Light background */
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            border-bottom: 3px solid #0077b6; /* Blue accent */
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-right: 20px;
+            border: 3px solid #0077b6; /* Border around the image */
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #0077b6;
+        }
+        .header p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #555;
+            
+        }
+
+        .justify-text {
+            text-align: justify;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 22px;
+            color: #0077b6;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #0077b6;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        .skills ul, .language ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style-type: none;
+            padding: 0;
+        }
+        .skills ul li, .language ul li {
+            background-color: #0077b6;
+            color: #ffffff;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .contact p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <video autoplay loop muted>
+            <source src="abstract-organic-lines-moewalls-com.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h1>My Resume</h1>
+        <div id="date-time"></div>
+        <img class="logo" src="images/nk.jpg" alt="Website Logo">
+
+        <div class="marquee-container">
+        <marquee behavior="scroll" direction="left">IMD 318 | PERSONAL RESUME WEBSITE</marquee>
+    </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="education.html">Education</a>
+        <a href="achievement.html">Achievement</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="resume.html">My Resume</a>
+        <a href="contact.html">Contact Me</a>
+    </div>
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+    <!-- Resume Content -->
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <img src="images/nurin.png" alt="Profile Picture">
+            <div>
+                <h1>Nurin Karmila Binti Abdullah</h1>
+                <p><strong>Address:</strong> No. 7, Jalan Kedondong 13, Taman Kota Jaya, 81900 Kota Tinggi, Johor</p>
+                <p><strong>Email:</strong> 2022891304@student.uitm.edu.my | <strong>Phone:</strong> 011-15860796</p>
+                
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="section">
+            <p class="justify-text">
+            Semester 5 student of Diploma Computing, Informatics and Mathematics in Information Management at Universiti Teknologi MARA (UiTM) Campus Segamat. Passionate about leveraging knowledge and skills in information management to contribute effectively in various areas of the field. Dedicated to continuous learning and professional growth.</p>
+        </div>
+
+
+<!-- Education Section -->
+        <div class="section">
+            <h2>Education</h2>
+            <ul>
+                <li><strong>Universiti Teknologi Mara, Segamat</strong> (Oct 2022 - Present)
+                    <ul>
+                        <li>Diploma in Information Management</li>
+                        <li>Dean list semester 2,3,4</li>
+                        <li>Current CGPA: Secret</li>
+                    </ul>
+                </li>
+                <li><strong>Sekolah Menengah Kebangsaan Tun Habab</strong> (2017 - 2021)
+                    <ul>
+                        <li>Pure science stream technical</li>
+                        <li>President of Pandu Puteri</li>
+                        <li>Vice President of Duta Penggerak Digital</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="section">
+            <h2>Experience</h2>
+            <ul>
+                <li><strong>President of Pandu Puteri</strong> - Sekolah Menengah Kebangsaan Tun Habab
+                    <ul>
+                        <li>Built leadership skills by organizing meetings and community service projects.</li>
+                        <li>Developed strong teamwork among members.</li>
+                    </ul>
+                </li>
+                <li><strong>Vice President of Duta Penggerak Digital</strong> - Sekolah Menengah Kebangsaan Tun Habab
+                    <ul>
+                        <li>Provided training for students and teachers on digital tools.</li>
+                        <li>Managed events and ensured time efficiency.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Extracurricular Activities -->
+<div class="section">
+    <h2>Extracurricular Activities</h2>
+    <table style="border-collapse: collapse; width: 90%; text-align: left; font-family: Arial, sans-serif;">
+        <thead>
+            <tr style="background-color: #4CAF50; color: white;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Activity</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #f9f9f9;">
+                <td style="padding: 10px; border: 1px solid #ddd;">E-sports Glorious Tun Habab Peringkat Negeri Johor</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Organized e-sports tournaments with over 200 participants.</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">Majlis Hari Guru</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Provided technical support for event audio and visuals.</td>
+            </tr>
+            <tr style="background-color: #f9f9f9;">
+                <td style="padding: 10px; border: 1px solid #ddd;">Robotics Program</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Collaborated on building robotic systems and teamwork enhancement.</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">Drama Pendek DFKL 2019</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Participated in the production and filming process for a drama festival.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+        <!-- Work Experience -->
+        <div class="section">
+    <h2>Work Experience</h2>
+    <ul>
+        <li><strong>Part-time Store Clerk</strong> - Econsave, Kota Tinggi, Johor
+            <ul>
+                <li>Inspected materials for quality assurance and managed inventory.</li>
+                <li>Maintained cleanliness and adhered to safety protocols.</li>
+            </ul>
+        </li>
+        <li><strong>Internship at Politeknik Metro Johor Bahru</strong>
+            <ul>
+                <li>Worked in the ICT Management sector.</li>
+                <li>Maintained ICT equipment and adhered to safety protocols.</li>
+                <li>Developed a database system.</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+        <!-- Additional Skills Section -->
+        <div class="section">
+            <h2>Additional Information</h2>
+            <div class="skills">
+                <h3>Technical Skills:</h3>
+                <ul>
+                    <li>C++ Programming</li>
+                    <li>Canva</li>
+                    <li>Capcut</li>
+                    <li>Microsoft Office (Excel, Word, PowerPoint - Basic)</li>
+                    <li>Adobe Premiere Pro (Basic)</li>
+                </ul>
+            </div>
+            <div class="language">
+                <h3>Languages:</h3>
+                <ul>
+                    <li>Malay</li>
+                    <li>English</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- References -->
+        <div class="section">
+            <h2>References</h2>
+            <ul>
+                <li><strong>Dr. Ahmad Fuzi Md Ajis</strong> - Industrial Training Coordinator, UiTM Segamat
+                    <ul>
+                        <li>Phone: 019-266 9439</li>
+                        <li>Email: ahmadfuzi@uitm.edu.my</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modern Footer -->
+<footer class="modern-footer">
+    <div class="footer-container">
+        <!-- Section Footer-->
+        <div class="footer-about">
+            <h3>IMD 318</h3>
+            <p>IMD 318 focuses on the creation of a personal website using HTML and CSS, where individuals can effectively present their professional background, skills, and accomplishments. The course empowers individuals to design a polished online portfolio that showcases their expertise and personal brand in a dynamic and visually appealing way.
+            </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="https://uitm.edu.my/index.php/en/">UiTM</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="resume.html">Resume</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="achievement.html">Achievement</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>
+                Universiti Teknologi MARA (UiTM) Segamat,<br>
+                Jalan Universiti Off, KM 12, Jalan Muar, Kemajuan Tanah Jementah Batu Sebelas, 85000 Segamat, Johor<br>
+                <strong>Tel:</strong> +60112345678
+            </p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/nurinkarmilaa.__?igsh=MTNiNm5uaXgwNDJvbQ%3D%3D&utm_source=qr"><img src="images/insta.png" alt="Instagram"></a>
+                <a href="https://t.me/aeryuyin"><img src="images/tele.png" alt="Telegram"></a>
+                <a href="https://www.tiktok.com/@aeryuuuuu?_t=8re1MBy9Qts&_r=1"><img src="images/tiktok.png" alt="TikTok"></a>
+
+                <a href="https://www.facebook.com/nurin.karmila.7927?mibextid=LQQJ4d"><img src="images/fb.png" alt="Facebook"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>© Nurin Karmila. All Rights Reserved.</p>
+        <p>
+            <a href="#">Arigato</a> |
+            <a href="#">IMD 318 </a> |
+            <a href="#">Personal Website</a>
+        </p>
+    </div>
+</footer>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("active");
+        }
+
+        const updateTime = () => {
+            const now = new Date();
+            document.getElementById("date-time").textContent = now.toLocaleString();
+        };
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

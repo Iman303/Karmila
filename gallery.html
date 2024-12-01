@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Nurin Karmila</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #c6c6ec;
+            color: white;
+        }
+
+        header {
+            position: relative;
+            height: 35vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        header video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            z-index: 1;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 3em;
+            z-index: 1;
+            color: black;
+        }
+
+        h3 {
+    margin: 1;
+    font-size: 1.5em;
+    z-index: 1;
+    color: white; 
+}
+
+/* Specific rule for album titles */
+.albums .album h3 {
+    color: #997300; /* Keep album titles chocolate */
+}
+
+        header img {
+            margin-top: 20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #000;
+            z-index: 1;
+        }
+
+        #date-time {
+            margin-top: 10px;
+            font-size: 1.2em;
+            z-index: 1;
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #000;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #001f3f;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: left 0.3s ease;
+            padding-top: 60px;
+            z-index: 1000;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .sidebar a:hover {
+            background-color: #1E90FF;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #001f3f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1100;
+        }
+
+        .toggle-btn:hover {
+            background-color: #1E90FF;
+        }
+
+        /* Marquee Styling */
+.marquee-container {
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%;
+    background-color: #002b80;
+    padding: 6px;
+    text-align: center;
+    color: white;
+    font-size: 0.9em;
+    z-index: 1; /* Ensure it's above the video background */
+}
+marquee {
+    font-weight: bold;
+    color: #ffd700; 
+}
+
+        /* Modern Footer Styling */
+.modern-footer {
+    background: #002b80;
+    color: white;
+    padding: 40px 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-container div {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-about h3,
+.footer-links h3,
+.footer-contact h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ffd700; /* Gold underline */
+    display: inline-block;
+    padding-bottom: 1px;
+}
+
+.footer-about p,
+.footer-contact p {
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #ffd700; /* Gold hover effect */
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a img {
+    width: 25px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons a img:hover {
+    transform: scale(1.2);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 5px;
+    font-size: 0.8em;
+}
+
+.footer-bottom a {
+    color: #ffd700;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+/* Keyframes for sliding animation */
+@keyframes slideInOut {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+        /* Albums Section */
+        .albums-section {
+            padding: 2rem;
+        }
+
+        .albums {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .album {
+            width: 400px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .album img {
+            width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .album:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Viewer Section */
+        #viewer-section {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            z-index: 1000;
+        }
+
+        #viewer-section.hidden {
+            display: none;
+        }
+
+        #gallery-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        #gallery-images img {
+    width: 250px; /* Increased size */
+    height: 250px; /* Ensure the height matches the width to keep the images square */
+    border: 2px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+    object-fit: cover; /* This ensures images fill the space proportionally */
+    transition: transform 0.3s ease; /* Adds smooth scaling effect */
+}
+
+#gallery-images img:hover {
+    transform: scale(1.1); /* Slightly increase the size when hovered */
+}
+
+        #close-viewer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .slideshow {
+  position: relative;
+  width: 60%; /* Full width */
+  height: 60vh; /* Adjusted to a rectangular height */
+  margin: 50px auto; /* Add spacing around the slideshow */
+  overflow: hidden;
+  border-radius: 10px; /* Optional rounded corners for style */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional shadow effect */
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: fade 16s infinite;
+}
+
+.slide:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.slide:nth-child(2) {
+  animation-delay: 4s;
+}
+
+.slide:nth-child(3) {
+  animation-delay: 8s;
+}
+
+.slide:nth-child(4) {
+  animation-delay: 12s;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <video autoplay loop muted>
+            <source src="abstract-organic-lines-moewalls-com.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h1>My Gallery</h1>
+        <div id="date-time"></div>
+        <img class="logo" src="images/nk.jpg" alt="Website Logo">
+
+        <div class="marquee-container">
+        <marquee behavior="scroll" direction="left">IMD 318 | PERSONAL RESUME WEBSITE</marquee>
+    </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="education.html">Education</a>
+        <a href="achievement.html">Achievement</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="resume.html">My Resume</a>
+        <a href="contact.html">Contact Me</a>
+    </div>
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+<div class="slideshow">
+  <img src="images/fam-6.jpg" alt="Image 5" class="slide">
+  <img src="images/c-1.jpg" alt="Image 6" class="slide">
+  <img src="images/c-2.jpg" alt="Image 7" class="slide">
+  <img src="images/f-1.jpg" alt="Image 8" class="slide">
+  <img src="images/c-4.jpg" alt="Image 4" class="slide">
+</div>
+
+    <!-- Gallery Content -->
+    <main>
+        <section class="albums-section">
+            <h2>Photo Albums</h2>
+            <div class="albums">
+                <div class="album" data-album="fam">
+                    <h3>Family</h3>
+                    <img src="images/fam.jpg" alt="Family" class="album-cover">
+                    
+                </div>
+                <div class="album" data-album="me">
+                    <h3>Me</h3>
+                    <img src="images/me-1.jpg" alt="Me" class="album-cover">
+                </div>
+                <div class="album" data-album="sof">
+                    <h3>Nayla Sofea</h3>
+                    <img src="images/sof-1.jpg" alt="Semester 1" class="album-cover">
+                </div>
+                <div class="album" data-album="f">
+                    <h3>Friends</h3>
+                    <img src="images/f-1.jpg" alt="Semester 1" class="album-cover">
+                </div>
+                <div class="album" data-album="c">
+                    <h3>Classmates</h3>
+                    <img src="images/c-1.jpg" alt="Semester 2" class="album-cover">
+                </div>
+            </div>
+        </section>
+
+        <section id="viewer-section" class="hidden">
+            <button id="close-viewer">Close</button>
+            <div id="gallery-images"></div>
+        </section>
+    </main>
+
+    <!-- Modern Footer -->
+<footer class="modern-footer">
+    <div class="footer-container">
+        <!-- Section Footer-->
+        <div class="footer-about">
+            <h3>IMD 318</h3>
+            <p>IMD 318 focuses on the creation of a personal website using HTML and CSS, where individuals can effectively present their professional background, skills, and accomplishments. The course empowers individuals to design a polished online portfolio that showcases their expertise and personal brand in a dynamic and visually appealing way.
+            </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="https://uitm.edu.my/index.php/en/">UiTM</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="resume.html">Resume</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="achievement.html">Achievement</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>
+                Universiti Teknologi MARA (UiTM) Segamat,<br>
+                Jalan Universiti Off, KM 12, Jalan Muar, Kemajuan Tanah Jementah Batu Sebelas, 85000 Segamat, Johor<br>
+                <strong>Tel:</strong> +60112345678
+            </p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/nurinkarmilaa.__?igsh=MTNiNm5uaXgwNDJvbQ%3D%3D&utm_source=qr"><img src="images/insta.png" alt="Instagram"></a>
+                <a href="https://t.me/aeryuyin"><img src="images/tele.png" alt="Telegram"></a>
+                <a href="https://www.tiktok.com/@aeryuuuuu?_t=8re1MBy9Qts&_r=1"><img src="images/tiktok.png" alt="TikTok"></a>
+
+                <a href="https://www.facebook.com/nurin.karmila.7927?mibextid=LQQJ4d"><img src="images/fb.png" alt="Facebook"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>© Nurin Karmila. All Rights Reserved.</p>
+        <p>
+            <a href="#">Arigato</a> |
+            <a href="#">IMD 318 </a> |
+            <a href="#">Personal Website</a>
+        </p>
+    </div>
+</footer>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("active");
+        }
+
+        const updateTime = () => {
+            const now = new Date();
+            document.getElementById("date-time").textContent = now.toLocaleString();
+        };
+        setInterval(updateTime, 1000);
+
+        // Gallery Interaction
+        document.addEventListener("DOMContentLoaded", () => {
+            const albums = document.querySelectorAll(".album");
+            const viewerSection = document.getElementById("viewer-section");
+            const galleryImages = document.getElementById("gallery-images");
+            const closeViewerButton = document.getElementById("close-viewer");
+
+            albums.forEach(album => {
+                album.addEventListener("click", () => {
+                    const albumName = album.dataset.album;
+
+                    // Update viewer with album images
+                    galleryImages.innerHTML = ""; // Clear existing content
+                    for (let i = 1; i <= 7; i++) { // Assume max 10 images per album
+                        const img = document.createElement("img");
+                        img.src = `images/${albumName}-${i}.jpg`;
+                        img.alt = `${albumName} Image ${i}`;
+                        galleryImages.appendChild(img);
+                    }
+
+                    viewerSection.classList.remove("hidden");
+                });
+            });
+
+            closeViewerButton.addEventListener("click", () => {
+                viewerSection.classList.add("hidden");
+            });
+        });
+    </script>
+</body>
+</html>

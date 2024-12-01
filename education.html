@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #c6c6ec; /* Dark gray from index.html */
+            color: white;
+        }
+
+        /* Header Styling with Live Wallpaper */
+        header {
+            position: relative;
+            height: 35vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Video Background */
+        header video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        header h1 {
+            margin: 10px 0;
+            font-size: 2.5em;
+            color:white;
+            z-index: 1;
+        }
+
+        header img {
+            margin-top: 20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #000;
+            z-index: 1;
+        }
+
+        /* Date and Time Styling */
+        #date-time {
+            margin-top: 10px;
+            font-size: 1.2em;
+            z-index: 1;
+        }
+
+        /* Logo Styling (Top-Right Corner) */
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #000;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #001f3f;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: left 0.3s ease;
+            padding-top: 60px;
+            z-index: 1000;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .sidebar a:hover {
+            background-color: #1E90FF;
+        }
+
+        /* Sidebar Toggle Button */
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #001f3f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1100;
+        }
+
+        .toggle-btn:hover {
+            background-color: #1E90FF;
+        }
+
+/* Marquee Styling */
+.marquee-container {
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%;
+    background-color: #002b80;
+    padding: 6px;
+    text-align: center;
+    color: white;
+    font-size: 0.9em;
+    z-index: 1; /* Ensure it's above the video background */
+}
+marquee {
+    font-weight: bold;
+    color: #ffd700; /* Gold color for the marquee text */
+}
+
+        /* Modern Footer Styling */
+.modern-footer {
+    background: #004d99;
+    color: white;
+    padding: 20px 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-container div {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-about h3,
+.footer-links h3,
+.footer-contact h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ffd700; /* Gold underline */
+    display: inline-block;
+    padding-bottom: 1px;
+}
+
+.footer-about p,
+.footer-contact p {
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.footer-links ul {
+    list-style: none;
+    margin-left: -20px;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #ffd700; /* Gold hover effect */
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a img {
+    width: 25px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons a img:hover {
+    transform: scale(1.2);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 5px;
+    font-size: 0.8em;
+}
+
+.footer-bottom a {
+    color: #ffd700;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+/* Keyframes for sliding animation */
+@keyframes slideInOut {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+        /* Card Styling */
+        .education-card {
+            background: linear-gradient(145deg, #001f3f, #004080);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Animated Background Effect */
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: -10;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: radial-gradient(circle, #ffd700 10%, transparent 50%);
+            transform: rotate(45deg);
+            transition: opacity 0.4s ease;
+            opacity: 0;
+            z-index: 0;
+        }
+
+        .education-card:hover::before {
+            opacity: 0.2;
+        }
+
+        .education-card h2 {
+            margin: 0 0 10px;
+            font-size: 1.8em;
+            z-index: 1;
+        }
+
+        .education-card p {
+            z-index: 1;
+            font-size: 1em;
+        }
+
+        .education-card .icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+            z-index: 1;
+        }
+       
+        .education-card-container {
+    margin: 20px 0; /* Add spacing between cards */
+    position: relative;
+        }
+
+       ul {
+    list-style-position: inside; /* Bullets inside the list item */
+    padding-left: 0; /* Remove default left padding */
+    margin: 0 auto; /* Center the entire list */
+    text-align: left; /* Keep the text left-aligned */
+    width: fit-content; /* Make sure the list width is based on content */
+    padding:10px;
+}
+
+ul li {
+    text-align: left; 
+    margin-left: 20px; 
+}
+    </style>
+</head>
+<body>
+    <!-- Header with Live Wallpaper -->
+    <header>
+        <video autoplay loop muted>
+            <source src="abstract-organic-lines-moewalls-com.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h1>Education</h1>
+        <div id="date-time"></div>
+        <img class="logo" src="images/nk.jpg" alt="Website Logo">
+
+        <div class="marquee-container">
+        <marquee behavior="scroll" direction="left">IMD 318 | PERSONAL RESUME WEBSITE</marquee>
+    </div>
+
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="education.html">Education</a>
+        <a href="achievement.html">Achievement</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="resume.html">My Resume</a>
+        <a href="contact.html">Contact Me</a>
+    </div>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Elementary School -->
+<div class="education-card">
+    <div class="icon">📚</div>
+    <h2>Elementary School</h2>
+    <img src="images/sktaman.jpg" alt="Picture 3" style="width: 200px; height: auto;">
+    <img src="images/satkj.jpeg" alt="Picture 3" style="width: 266px; height: auto;">
+    <ul>
+        <li>I attended Sekolah Rendah Kebangsaan Taman Kota Jaya.</li>
+        <li>I attended Sekolah Agama Taman Kota Jaya.</li>
+        <li>Used to be a prefect and class monitor.</li>
+        <li>Top 3 student in SATKJ</li>
+        <li>UPKK: 8A</li>
+        <li>SDEA: Rank 1</li>   
+    </ul>
+</div>
+
+        <!-- High School -->
+        <div class="education-card">
+            <div class="icon">🏫</div>
+            <h2>High School in Sekolah Menengah Kebangsaan Tun Habab</h2>
+            <img src="images/tunhabab.jpg" alt="Picture 3" style="width: 200px; height: auto;">
+            <ul>
+        <li>Science technical stream</li>
+        <li>Vice president of Duta Penggerak Digital and Class Monitor</li>
+        <li>President of Girl Guides</li>
+        <li>Used to be athlete</li>
+    </ul>
+        </div>
+
+        <!-- Diploma -->
+        <div class="education-card">
+            <div class="icon">🎓</div>
+            <h2>Diploma in UiTM Segamat Johor</h2>
+            <img src="images/uitmcj.jpg" alt="Picture 3" style="width: 200px; height: auto;">
+        <ul>
+        <li>Currently completing my diploma in Information Management, gaining insights into system development, data management, and more.</li>
+        <li>Athlete Karisma UiTM for Esports</li>
+        <li>The leader of the Kaswara Theatre Department.</li>
+    </ul>
+        </div>
+
+        <!-- Degree (Coming Soon) -->
+        <div class="education-card">
+            <div class="icon">🌟</div>
+            <h2>Degree</h2>
+            <img src="images/notsure.jpg" alt="Picture 3" style="width: 200px; height: auto;">
+            <p style="text-align: center;">
+                I aspire to continue my education with a degree, further enhancing my skills and knowledge in the field for information.
+            </p>
+        </div>
+    </div>
+
+    <!-- Modern Footer -->
+<footer class="modern-footer">
+    <div class="footer-container">
+        <!-- Section Footer-->
+        <div class="footer-about">
+            <h3>IMD 318</h3>
+            <p>IMD 318 focuses on the creation of a personal website using HTML and CSS, where individuals can effectively present their professional background, skills, and accomplishments. The course empowers individuals to design a polished online portfolio that showcases their expertise and personal brand in a dynamic and visually appealing way.
+            </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="https://uitm.edu.my/index.php/en/">UiTM</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="resume.html">Resume</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="achievement.html">Achievement</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>
+                Universiti Teknologi MARA (UiTM) Segamat,<br>
+                Jalan Universiti Off, KM 12, Jalan Muar, Kemajuan Tanah Jementah Batu Sebelas, 85000 Segamat, Johor<br>
+                <strong>Tel:</strong> +60112345678
+            </p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/nurinkarmilaa.__?igsh=MTNiNm5uaXgwNDJvbQ%3D%3D&utm_source=qr"><img src="images/insta.png" alt="Instagram"></a>
+                <a href="https://t.me/aeryuyin"><img src="images/tele.png" alt="Telegram"></a>
+                <a href="https://www.tiktok.com/@aeryuuuuu?_t=8re1MBy9Qts&_r=1"><img src="images/tiktok.png" alt="TikTok"></a>
+
+                <a href="https://www.facebook.com/nurin.karmila.7927?mibextid=LQQJ4d"><img src="images/fb.png" alt="Facebook"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>© Nurin Karmila. All Rights Reserved.</p>
+        <p>
+            <a href="#">Arigato</a> |
+            <a href="#">IMD 318 </a> |
+            <a href="#">Personal Website</a>
+        </p>
+    </div>
+</footer>
+
+    <script>
+        // Sidebar Toggle Function
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // Date and Time Function
+        setInterval(function() {
+            const dateTime = new Date();
+            document.getElementById('date-time').innerHTML = dateTime.toLocaleString();
+        }, 1000);
+    </script>
+</body>
+</html>

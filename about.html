@@ -90,21 +90,18 @@
         }
 
         /* Back Button Styling */ 
-.back-button { 
-    position: absolute; 
-    top: 10px; 
-    left: 1100px; /* Adjust the position from the left edge */ 
-    padding: 8px 16px; 
-    background-color: #352492; 
-    color: white; 
-    font-size: 16px; 
-    font-weight: bold; 
-    border-radius: 5px; 
-    text-decoration: none; 
-    display: inline-flex; 
-    align-items: center; 
-    transition: background-color 0.3s ease, transform 0.3s ease; 
-}
+.back-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
 
         /* Marquee Styling */
         .marquee-container {
@@ -644,10 +641,7 @@ table tr:nth-child(odd):hover td {
         </div>
 
         <!-- Back Button in Header --> 
-    <a href="index.html" class="back-button"> 
-      &#8592; Back 
-  </a>
-
+    <button class="back-button" onclick="goBack()">Go Back</button>
         <div class="marquee-container">
         <marquee behavior="scroll" direction="left">IMD 318 | PERSONAL RESUME WEBSITE</marquee>
     </div>
@@ -1021,6 +1015,9 @@ table tr:nth-child(odd):hover td {
 
     <!-- JavaScript -->
     <script>
+        function goBack() {
+            window.history.back();
+        }
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('active');
         }
